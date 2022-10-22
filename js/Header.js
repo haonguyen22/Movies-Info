@@ -1,11 +1,20 @@
 export default {
      data() {
           return {
-               
+               checked: false
+          };
+     },
+     methods: {
+          DarkMode() {
+
           }
      },
-     template: 
-     `
+     updated() {
+          if(this.checked == false){
+               document.documentElement.setAttribute("data-theme", "light");
+          } else document.documentElement.setAttribute("data-theme", "dark");
+     },
+     template: `
           <div id="header">
                <div class="header__id">
                     20120470
@@ -17,12 +26,12 @@ export default {
                     <p>&lt;Key API&gt;</p>
                     <div class="dark_mode">
                          <label class="switch">
-                              <input type="checkbox">
+                              <input type="checkbox" v-model="checked">
                               <span class="slider round"></span>
                          </label>
                          <p>Dark Mode</p>
                     </div>
                </div>
           </div>
-     `
-}
+     `,
+};

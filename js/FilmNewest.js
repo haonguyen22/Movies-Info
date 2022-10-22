@@ -1,28 +1,90 @@
-export default  {
+import InThreaters from "./../db/InTheaters.json" assert { type: "json" };
+
+export default {
      data() {
           return {
-               
+               InThreaters: InThreaters.items,
+               current: 0,
+          };
+     },
+     methods: {
+          previous() {
+               let posters = document.querySelectorAll(".poster");
+               let pagination = document.querySelectorAll(".page-link");
+               if (this.current == 0) return;
+               else {
+                    this.current -= 1;
+                    for (let i = 0; i < 5; i++) {
+                         if (i == this.current) {
+                              posters[i].classList.add("poster__selected");
+                              pagination[i].classList.add("page__selected");
+                         } else {
+                              posters[i].classList.remove("poster__selected");
+                              pagination[i].classList.remove("page__selected");
+                         }
+                    }
+               }
+          },
+
+          next() {
+               let posters = document.querySelectorAll(".poster");
+               let pagination = document.querySelectorAll(".page-link");
+               if (this.current == 4) return;
+               else {
+                    this.current += 1;
+                    for (let i = 0; i < 5; i++) {
+                         if (i == this.current) {
+                              posters[i].classList.add("poster__selected");
+                              pagination[i].classList.add("page__selected");
+                         } else {
+                              posters[i].classList.remove("poster__selected");
+                              pagination[i].classList.remove("page__selected");
+                         }
+                    }
+               }
+          },
+
+          paginate(e) {
+               let pagination = document.querySelectorAll(".page-link");
+               let posters = document.querySelectorAll(".poster");
+               this.current = e.target.id - 1;
+               for (let i = 0; i < 5; i++) {
+                    if (i == this.current) {
+                         pagination[i].classList.add("page__selected");
+                         posters[i].classList.add("poster__selected");
+                    } else {
+                         pagination[i].classList.remove("page__selected");
+                         posters[i].classList.remove("poster__selected");
+                    }
+               }
           }
      },
-     template: 
-     `
+     mounted() {
+          document
+               .querySelectorAll(".poster")
+               [this.current].classList.add("poster__selected");
+     },
+     template: `
           <div class="film__newest">
-               <button>&lt;</button>
-               <div class="poster">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,12,128,176_AL_.jpg"
-                         alt="The Shawshank Redemption">
+               <button @click="previous">&lt;</button>
+               <div class="poster" v-for="n in 5">
+                    <img :src="this.InThreaters[n-1].image"
+                         :alt="this.InThreaters[n-1].title">
                     <div class="poster__desc">
-                         <h3 class="film__newest--name">The Shawshank Redemption</h3>
+                         <h5 class="film__newest--name">{{this.InThreaters[n-1].title}}</h5>
+                         <h5 class="film__newest--name">Rate: {{this.InThreaters[n-1].imDbRating}}</h5>
+                         <h5 class="film__newest--name">Length: {{this.InThreaters[n-1].runtimeStr}}</h5>
                          <ul class="pagination">
-                              <li class="page-item"><a class="page-link" href="#"></a></li>
-                              <li class="page-item"><a class="page-link" href="#"></a></li>
-                              <li class="page-item"><a class="page-link" href="#"></a></li>
-                              <li class="page-item"><a class="page-link" href="#"></a></li>
-                              <li class="page-item"><a class="page-link" href="#"></a></li>
+                              <li class="page-item" v-for="i in 5">
+                                   <a class="page-link page__selected" :id='i' v-if="i == n" @click="paginate"></a>
+                                   <a class="page-link" :id='i' v-else @click="paginate"></a>
+                                   
+                              </li>
                          </ul>
                     </div>
+
                </div>
-               <button>&gt;</button>
+               <button @click="next">&gt;</button>
           </div>
-     `
-}
+     `,
+};

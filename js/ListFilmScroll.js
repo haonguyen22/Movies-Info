@@ -7,7 +7,16 @@ export default {
      template: 
      `
           <div class="film__component">
-               <div class="film__title">Most Popular</div>
+               <div class="film__header">
+                    <div class="film__title">Most Popular</div>
+                    <ul class="pagination">
+                         <li class="page-item"><a class="page-link" href="#"></a></li>
+                         <li class="page-item"><a class="page-link" href="#"></a></li>
+                         <li class="page-item"><a class="page-link" href="#"></a></li>
+                         <li class="page-item"><a class="page-link" href="#"></a></li>
+                         <li class="page-item"><a class="page-link" href="#"></a></li>
+                    </ul>
+               </div>
                <div class="film__scroll">
                     <button>&lt;</button>
                     <div class="film__list">
