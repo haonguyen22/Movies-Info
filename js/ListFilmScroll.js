@@ -1,49 +1,61 @@
 export default {
+     props: ["data", "name"],
      data() {
           return {
-               
-          }
+               numOfElement: 26,
+               database: this.data, // Get 26 elements
+               current: 0,
+               numOfPage: 1,
+               title: this.name
+          };
      },
-     template: 
-     `
+     methods: {
+          previous() {
+               if (this.current == 0) this.current = this.numOfPage - 1;
+               else this.current -= 1;
+          },
+
+          next() {
+               if (this.current == this.numOfPage - 1) this.current = 0;
+               else this.current += 1;
+          },
+
+          paginate(e) {
+               this.current = e.target.id - 1;
+          },
+     },
+     mounted() {
+          document.querySelector(".page-link").classList.add("page__selected");
+          this.database = this.data.slice(0, this.numOfElement);
+          if (this.numOfElement % 3 == 0) {
+               this.numOfPage = parseInt(this.numOfElement / 3);
+          } else this.numOfPage = parseInt(this.numOfElement / 3) + 1;
+          console.log(this.database)
+     },
+     template: `
           <div class="film__component">
                <div class="film__header">
-                    <div class="film__title">Most Popular</div>
+                    <div class="film__title">{{this.title}}</div>
                     <ul class="pagination">
-                         <li class="page-item"><a class="page-link" href="#"></a></li>
-                         <li class="page-item"><a class="page-link" href="#"></a></li>
-                         <li class="page-item"><a class="page-link" href="#"></a></li>
-                         <li class="page-item"><a class="page-link" href="#"></a></li>
-                         <li class="page-item"><a class="page-link" href="#"></a></li>
+                         <li class="page-item" v-for="i in this.numOfPage">
+                              <a class="page-link page__selected" :id="i" v-if="i == this.current + 1" @click="paginate"></a>
+                              <a class="page-link" :id="i" v-else @click="paginate"></a>
+                         </li>
                     </ul>
                </div>
                <div class="film__scroll">
-                    <button>&lt;</button>
+                    <button @click="previous">&lt;</button>
                     <div class="film__list">
-                         <div class="film__item">
-                              <img src="https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,12,128,176_AL_.jpg"
-                                   alt="The Shawshank Redemption">
-                              <div class="film__name">
-                                   <h4>The Shawshank Redemption (1994)</h4>
-                              </div>
-                         </div>
-                         <div class="film__item">
-                              <img src="https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,12,128,176_AL_.jpg"
-                                   alt="The Shawshank Redemption">
-                              <div class="film__name">
-                                   <h4>The Shawshank Redemption (1994)</h4>
-                              </div>
-                         </div>
-                         <div class="film__item">
-                              <img src="https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,12,128,176_AL_.jpg"
-                                   alt="The Shawshank Redemption">
-                              <div class="film__name">
-                                   <h4>The Shawshank Redemption (1994)</h4>
+                         <div class="film__item" v-for="n in 3" >
+                              <img v-if="((this.current)*3 + n - 1) < this.numOfElement" :src="this.database[(this.current)*3 + n - 1].image"
+                                   :alt="this.database[this.current*3 + n - 1].title" >
+                              <div class="film__name" v-if="((this.current)*3 + n - 1) < this.numOfElement">
+                                   <h4>{{this.database[this.current*3 + n - 1].title}}</h4>
                               </div>
                          </div>
                     </div>
-                    <button>&gt;</button>
+                    <button @click="next">&gt;</button>
                </div>
           </div>
-     `
-}
+     `,
+};

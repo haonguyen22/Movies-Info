@@ -1,22 +1,21 @@
-// "id": "tt0111161",
-// "rank": "1",
-// "title": "The Shawshank Redemption",
-// "fullTitle": "The Shawshank Redemption (1994)",
-// "year": "1994",
-// "image": "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,12,128,176_AL_.jpg",
-// "crew": "Frank Darabont (dir.), Tim Robbins, Morgan Freeman",
-// "imDbRating": "9.2",
-// "imDbRatingCount": "2652494"
-
 import Header from "./js/Header.js";
 import Nav from './js/Nav.js'
 import ListFilmScroll from "./js/ListFilmScroll.js";
 import FilmNewest from './js/FilmNewest.js'
 import Footer from "./js/Footer.js";
 
+import mostPopular from "./db/MostPopular.json" assert { type: "json" };
+import topRating from "./db/250movies.json" assert { type: "json" };
+
+
 export default {
      data() {
-          return {};
+          return {
+               mostPopular: mostPopular.items,
+               topRating: topRating.items,
+               popularTitle: "Most popular",
+               topRatingTitle: "Top Rating"
+          };
      },
      components: {
           Header,
@@ -47,13 +46,13 @@ export default {
 
                               <div class="row">
                                    <div class="col-12">
-                                        <ListFilmScroll />
+                                        <ListFilmScroll :data="this.mostPopular" :name="this.popularTitle"/>
                                    </div>
                               </div>
 
                               <div class="row">
                                    <div class="col-12">
-                                        <ListFilmScroll />
+                                        <ListFilmScroll :data="this.topRating" :name="topRatingTitle"/>
                                    </div>
                               </div>
                          </div>

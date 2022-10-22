@@ -10,50 +10,40 @@ export default {
      methods: {
           previous() {
                let posters = document.querySelectorAll(".poster");
-               let pagination = document.querySelectorAll(".page-link");
-               if (this.current == 0) return;
-               else {
-                    this.current -= 1;
-                    for (let i = 0; i < 5; i++) {
-                         if (i == this.current) {
-                              posters[i].classList.add("poster__selected");
-                              pagination[i].classList.add("page__selected");
-                         } else {
-                              posters[i].classList.remove("poster__selected");
-                              pagination[i].classList.remove("page__selected");
-                         }
+
+               if (this.current == 0) this.current = 4;
+               else this.current -= 1;
+
+               for (let i = 0; i < 5; i++) {
+                    if (i == this.current) {
+                         posters[i].classList.add("poster__selected");
+                    } else {
+                         posters[i].classList.remove("poster__selected");
                     }
                }
           },
 
           next() {
                let posters = document.querySelectorAll(".poster");
-               let pagination = document.querySelectorAll(".page-link");
-               if (this.current == 4) return;
-               else {
-                    this.current += 1;
-                    for (let i = 0; i < 5; i++) {
-                         if (i == this.current) {
-                              posters[i].classList.add("poster__selected");
-                              pagination[i].classList.add("page__selected");
-                         } else {
-                              posters[i].classList.remove("poster__selected");
-                              pagination[i].classList.remove("page__selected");
-                         }
+               if (this.current == 4) this.current = 0;
+               else this.current += 1;
+
+               for (let i = 0; i < 5; i++) {
+                    if (i == this.current) {
+                         posters[i].classList.add("poster__selected");
+                    } else {
+                         posters[i].classList.remove("poster__selected");
                     }
                }
           },
 
           paginate(e) {
-               let pagination = document.querySelectorAll(".page-link");
                let posters = document.querySelectorAll(".poster");
                this.current = e.target.id - 1;
                for (let i = 0; i < 5; i++) {
                     if (i == this.current) {
-                         pagination[i].classList.add("page__selected");
                          posters[i].classList.add("poster__selected");
                     } else {
-                         pagination[i].classList.remove("page__selected");
                          posters[i].classList.remove("poster__selected");
                     }
                }
