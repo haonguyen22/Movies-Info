@@ -34,6 +34,66 @@ export default {
           DirectorDetail,
      },
      methods: {
+          getTop250() {
+               try {
+                    var requestOptions = {
+                         method: "GET",
+                         redirect: "follow",
+                    };
+                    fetch(
+                         `https://imdb-api.com/en/API/Top250Movies/k_spa3r6n5`,
+                         requestOptions
+                    )
+                         .then((response) => response.json())
+                         .then((result) => {
+                              var topRating = result.items;
+                              return topRating;
+                         })
+                         .catch((error) => console.log("error", error));
+               } catch (e) {
+                    console.log(e);
+               }
+          },
+          getMostPopular() {
+               try {
+                    var requestOptions = {
+                         method: "GET",
+                         redirect: "follow",
+                    };
+                    fetch(
+                         `https://imdb-api.com/en/API/MostPopularMovies/k_spa3r6n5`,
+                         requestOptions
+                    )
+                         .then((response) => response.json())
+                         .then((result) => {
+                              var mostPopular = result.items;
+                              return mostPopular;
+                         })
+                         .catch((error) => console.log("error", error));
+               } catch (e) {
+                    console.log(e);
+               }
+          },
+          getInThreaters() {
+               try {
+                    var requestOptions = {
+                         method: "GET",
+                         redirect: "follow",
+                    };
+                    fetch(
+                         `https://imdb-api.com/en/API/InTheaters/k_spa3r6n5`,
+                         requestOptions
+                    )
+                         .then((response) => response.json())
+                         .then((result) => {
+                              var filmNewest = result.items;
+                              return filmNewest;
+                         })
+                         .catch((error) => console.log("error", error));
+               } catch (e) {
+                    console.log(e);
+               }
+          },
           searchTitle(val) {
                try {
                     var requestOptions = {
@@ -41,7 +101,7 @@ export default {
                          redirect: "follow",
                     };
                     fetch(
-                         `https://imdb-api.com/en/API/SearchMovie/k_ddst01er/${val}`,
+                         `https://imdb-api.com/en/API/SearchMovie/k_spa3r6n5/${val}`,
                          requestOptions
                     )
                          .then((response) => response.json())
@@ -65,7 +125,7 @@ export default {
                     };
 
                     fetch(
-                         `https://imdb-api.com/en/API/Title/k_ddst01er/${filmId}/Posters,Images,Ratings,`,
+                         `https://imdb-api.com/en/API/Title/k_spa3r6n5/${filmId}/Posters,Images,Ratings,`,
                          requestOptions
                     )
                          .then((response) => response.json())
@@ -85,7 +145,7 @@ export default {
                          redirect: "follow",
                     };
                     fetch(
-                         `https://imdb-api.com/en/API/Name/k_ddst01er/${id}`,
+                         `https://imdb-api.com/en/API/Name/k_spa3r6n5/${id}`,
                          requestOptions
                     )
                          .then((response) => response.json())

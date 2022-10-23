@@ -3,7 +3,7 @@ export default {
      data() {
           return {
                filmNewest: this.data,
-               current: 0
+               current: 0,
           };
      },
      methods: {
@@ -45,15 +45,15 @@ export default {
                }
           },
           clickMovie() {
-               this.$emit("detailFilm", this.filmNewest[this.current].id)
+               this.$emit("detailFilm", this.filmNewest[this.current].id);
           },
      },
      mounted() {
-          document.querySelectorAll(".poster")[this.current].classList.add("poster__selected");
+          document
+               .querySelectorAll(".poster")
+               [this.current].classList.add("poster__selected");
      },
-     updated() {
-          
-     },
+     updated() {},
      template: `
           <div class="film__newest">
                <button @click="previous">&lt;</button>

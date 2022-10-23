@@ -12,9 +12,6 @@ export default {
                this.$emit("homePage");
           },
      },
-     updated() {
-          console.log(this.selected);
-     },
      template: `
           <div id="nav">
                <div class="nav__home" @click="homePage">Home</div>

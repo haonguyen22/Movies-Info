@@ -273,7 +273,22 @@
      border-radius: var(--border-radius);
      border: 1px solid var(--border-color);
 }
+.film_participated {
 
+}
+.film__img {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     flex-wrap: wrap;
+}
+.film__img img:hover {
+     cursor: pointer;
+}
+.film__img img {
+     width: 100px;
+     flex: 0 0 20%;
+}
 .detail__item .detail {
      width: 70%;
      height: 100%;

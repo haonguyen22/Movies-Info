@@ -1,12 +1,12 @@
 export default {
-     props: ["data", "name"],
+     props: ["data", "name", "numOfElement"],
      data() {
           return {
-               numOfElement: 27,// Get 27 elements
-               database: this.data, 
+               numOfElement: this.numOfElement,
+               database: this.data,
                current: 0,
                numOfPage: 1,
-               title: this.name
+               title: this.name,
           };
      },
      methods: {
@@ -23,9 +23,12 @@ export default {
           paginate(e) {
                this.current = e.target.id - 1;
           },
-          
+
           clickMovie(e, index) {
-               this.$emit("detailFilm", this.database[(this.current)*3 + index - 1].id)
+               this.$emit(
+                    "detailFilm",
+                    this.database[this.current * 3 + index - 1].id
+               );
           },
      },
      mounted() {

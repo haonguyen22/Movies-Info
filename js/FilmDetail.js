@@ -6,9 +6,9 @@ export default {
           };
      },
      methods: {
-          directorId(){
-               this.$emit("director", this.filmDetail.directorList[0].id)
-          }
+          directorId() {
+               this.$emit("director", this.filmDetail.directorList[0].id);
+          },
      },
 
      template: `

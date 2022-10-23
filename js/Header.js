@@ -1,13 +1,12 @@
 export default {
      data() {
           return {
-               checked: false
+               checked: false,
           };
      },
-     methods: {
-     },
+     methods: {},
      updated() {
-          if(this.checked == false){
+          if (this.checked == false) {
                document.documentElement.setAttribute("data-theme", "light");
           } else document.documentElement.setAttribute("data-theme", "dark");
      },
@@ -20,7 +19,7 @@ export default {
                     <h1>Movies info</h1>
                </div>
                <div class="header__right">
-                    <p>k_ddst01er</p>
+                    <p>k_spa3r6n5</p>
                     <div class="dark_mode">
                          <label class="switch">
                               <input type="checkbox" v-model="checked">
