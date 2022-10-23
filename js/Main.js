@@ -22,13 +22,16 @@ export default {
           FilmNewest,
           ListFilmScroll,
      },
-     methods: {},
-     updated() {},
+     methods: {
+          DetailFilm(film) {
+               this.$emit("detailFilm", film);
+          },
+     },
      template: `
           <div id="main">
                <div class="row">
                     <div class="col-12">
-                         <FilmNewest :data="this.filmNewest" />
+                         <FilmNewest :data="this.filmNewest" @detailFilm="DetailFilm($event)"/>
                     </div>
                </div>
 

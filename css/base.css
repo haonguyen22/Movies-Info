@@ -11,6 +11,7 @@ html {
      --border-radius: 4px;
      --border-color: none;
      --button-hover: rgba(94, 87, 87, 0.4);
+     --background-detail: rgba(0,0,0,0.15);
 }
 
 html[data-theme="dark"] {
@@ -25,6 +26,7 @@ html[data-theme="dark"] {
      --box-shadow: 1px 2px 3px var(--shadow);
      --border-radius: 4px;
      --border-color: rgba(255,255,255,0.4);
+     --background-detail: rgba(255,255,255,0.15);
 }
 
 p {

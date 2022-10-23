@@ -30,7 +30,6 @@ export default {
           if (this.numOfElement % 3 == 0) {
                this.numOfPage = parseInt(this.numOfElement / 3);
           } else this.numOfPage = parseInt(this.numOfElement / 3) + 1;
-          console.log(this.database)
      },
      template: `
           <div class="film__component">

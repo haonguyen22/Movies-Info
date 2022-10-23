@@ -20,7 +20,7 @@ export default {
                     <p>{{item.year}}</p>
                </div>
           </div>
-          <div class="film__list--search" v-else> 
+          <div class="message" v-else> 
                <div class="message__error">Không tìm thấy kết quả phù hợp</div>
           </div>
      `,
