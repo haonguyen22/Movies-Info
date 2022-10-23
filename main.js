@@ -1,28 +1,41 @@
 import Header from "./js/Header.js";
-import Nav from './js/Nav.js'
-import ListFilmScroll from "./js/ListFilmScroll.js";
-import FilmNewest from './js/FilmNewest.js'
+import Nav from './js/Nav.js';
 import Footer from "./js/Footer.js";
+import Main from "./js/Main.js";
+import Search from "./js/Search.js";
 
 import mostPopular from "./db/MostPopular.json" assert { type: "json" };
 import topRating from "./db/250movies.json" assert { type: "json" };
+import filmNewest from "./db/InTheaters.json" assert { type: "json" };
 
 
 export default {
      data() {
           return {
+               filmNewest: filmNewest.items,
                mostPopular: mostPopular.items,
                topRating: topRating.items,
                popularTitle: "Most popular",
-               topRatingTitle: "Top Rating"
+               topRatingTitle: "Top Rating",
+               currComponent: "Main",
+               search: []
           };
      },
      components: {
           Header,
           Nav,
-          ListFilmScroll,
-          FilmNewest,
-          Footer
+          Footer,
+          Main,
+          Search
+     },
+     methods: {
+          searchTitle(val){
+               this.search = this.topRating;
+               this.currComponent = "Search"
+          },
+          homePage(){
+               this.currComponent = "Main" 
+          }
      },
      template: `
           <div class="row">
@@ -32,30 +45,12 @@ export default {
                </div>
                <div class="row">
                     <div class="col-12">
-                         <Nav />
+                         <Nav @searchType="searchTitle($event)" @homePage="homePage"/>
                     </div>
                </div>
                <div class="row">
                     <div class="col-12">
-                         <div id="main">
-                              <div class="row">
-                                   <div class="col-12">
-                                        <FilmNewest />
-                                   </div>
-                              </div>
-
-                              <div class="row">
-                                   <div class="col-12">
-                                        <ListFilmScroll :data="this.mostPopular" :name="this.popularTitle"/>
-                                   </div>
-                              </div>
-
-                              <div class="row">
-                                   <div class="col-12">
-                                        <ListFilmScroll :data="this.topRating" :name="topRatingTitle"/>
-                                   </div>
-                              </div>
-                         </div>
+                         <component :is="this.currComponent" :searchData="this.search" :filmNewest="this.filmNewest" :popular="this.mostPopular" :popularTitle="this.popularTitle" :topRating="this.topRating" :topRatingTitle="topRatingTitle"/>
                     </div>
                </div>
                <div class="row">
@@ -65,3 +60,5 @@ export default {
                </div>
      `,
 };
+
+

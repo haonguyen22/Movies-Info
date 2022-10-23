@@ -5,9 +5,6 @@ export default {
           };
      },
      methods: {
-          DarkMode() {
-
-          }
      },
      updated() {
           if(this.checked == false){

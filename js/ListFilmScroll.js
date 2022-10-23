@@ -2,8 +2,8 @@ export default {
      props: ["data", "name"],
      data() {
           return {
-               numOfElement: 26,
-               database: this.data, // Get 26 elements
+               numOfElement: 27,// Get 27 elements
+               database: this.data, 
                current: 0,
                numOfPage: 1,
                title: this.name
