@@ -22,7 +22,7 @@ export default {
                     <div class="detail_desc">
                          <p><b>Year:</b> {{this.film.year}}</p>
                          <p><b>Genres:</b> {{this.film.genres}}</p>
-                         <p><b>Directors:</b> <a style="" @click="directorId">{{this.film.directors}}</a></p>
+                         <p><b>Directors:</b> <span style="" @click="directorId">{{this.film.directors}}</span></p>
                          <p><b>Length:</b> {{this.film.runtimeStr}}</p>
                          <p><b>Rating:</b> {{this.film.imDbRating}}</p>
                          <p><b>Plot:</b> {{this.film.plot}}</p>

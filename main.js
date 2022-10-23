@@ -9,7 +9,6 @@ import DirectorDetail from "./js/DirectorDetail.js";
 import mostPopular from "./db/MostPopular.json" assert { type: "json" };
 import topRating from "./db/250movies.json" assert { type: "json" };
 import filmNewest from "./db/InTheaters.json" assert { type: "json" };
-import Jamie from "./db/search_Jamie Lee Curtis.json" assert { type: "json" };
 
 export default {
      data() {
@@ -36,24 +35,71 @@ export default {
      },
      methods: {
           searchTitle(val) {
-               this.search = this.topRating;
-               this.currComponent = "Search";
+               try {
+                    var requestOptions = {
+                         method: "GET",
+                         redirect: "follow",
+                    };
+                    fetch(
+                         `https://imdb-api.com/en/API/SearchMovie/k_ddst01er/${val}`,
+                         requestOptions
+                    )
+                         .then((response) => response.json())
+                         .then((result) => {
+                              this.search = result.results;
+                              this.currComponent = "Search";
+                         })
+                         .catch((error) => console.log("error", error));
+               } catch (e) {
+                    console.log(e);
+               }
           },
           homePage() {
                this.currComponent = "Main";
           },
-          DetailMovie(film) {
-               this.film = film;
-               this.currComponent = "FilmDetail";
+          DetailMovie(filmId) {
+               try {
+                    var requestOptions = {
+                         method: "GET",
+                         redirect: "follow",
+                    };
+
+                    fetch(
+                         `https://imdb-api.com/en/API/Title/k_ddst01er/${filmId}/Posters,Images,Ratings,`,
+                         requestOptions
+                    )
+                         .then((response) => response.json())
+                         .then((result) => {
+                              this.film = result;
+                              this.currComponent = "FilmDetail";
+                         })
+                         .catch((error) => console.log("error", error));
+               } catch (e) {
+                    console.log(e);
+               }
           },
           clickDirector(id) {
-               // get API cua nguoi co cai id nay
-               this.director = Jamie;
-               this.currComponent = "DirectorDetail"
+               try {
+                    var requestOptions = {
+                         method: "GET",
+                         redirect: "follow",
+                    };
+                    fetch(
+                         `https://imdb-api.com/en/API/Name/k_ddst01er/${id}`,
+                         requestOptions
+                    )
+                         .then((response) => response.json())
+                         .then((result) => {
+                              this.director = result;
+                              this.currComponent = "DirectorDetail";
+                         })
+                         .catch((error) => console.log("error", error));
+               } catch (e) {
+                    console.log(e);
+               }
           },
      },
-     mounted() {
-     },
+     mounted() {},
      updated() {},
      template: `
           <div class="row">

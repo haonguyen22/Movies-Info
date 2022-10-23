@@ -37,13 +37,13 @@ export default {
 
                <div class="row">
                     <div class="col-12">
-                         <ListFilmScroll :data="this.mostPopular" :name="this.popularTitle"/>
+                         <ListFilmScroll :data="this.mostPopular" :name="this.popularTitle" @detailFilm="DetailFilm($event)" />
                     </div>
                </div>
 
                <div class="row">
                     <div class="col-12">
-                         <ListFilmScroll :data="this.topRating" :name="topRatingTitle"/>
+                         <ListFilmScroll :data="this.topRating" :name="topRatingTitle" @detailFilm="DetailFilm($event)"/>
                     </div>
                </div>
           </div>

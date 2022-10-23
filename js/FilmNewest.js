@@ -45,7 +45,7 @@ export default {
                }
           },
           clickMovie() {
-               this.$emit("detailFilm", this.filmNewest[this.current])
+               this.$emit("detailFilm", this.filmNewest[this.current].id)
           },
      },
      mounted() {
@@ -57,7 +57,7 @@ export default {
      template: `
           <div class="film__newest">
                <button @click="previous">&lt;</button>
-               <div class="poster" v-for="n in 5" @click="clickMovie" >
+               <div class="poster" v-for="n in 5" @click="clickMovie">
                     <img :src="this.filmNewest[n-1].image"
                          :alt="this.filmNewest[n-1].title">
                     <div class="poster__desc">

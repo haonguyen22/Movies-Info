@@ -23,6 +23,10 @@ export default {
           paginate(e) {
                this.current = e.target.id - 1;
           },
+          
+          clickMovie(e, index) {
+               this.$emit("detailFilm", this.database[(this.current)*3 + index - 1].id)
+          },
      },
      mounted() {
           document.querySelector(".page-link").classList.add("page__selected");
@@ -45,7 +49,7 @@ export default {
                <div class="film__scroll">
                     <button @click="previous">&lt;</button>
                     <div class="film__list">
-                         <div class="film__item" v-for="n in 3" >
+                         <div class="film__item" v-for="n in 3"  @click="clickMovie($event, n)">
                               <img v-if="((this.current)*3 + n - 1) < this.numOfElement" :src="this.database[(this.current)*3 + n - 1].image"
                                    :alt="this.database[this.current*3 + n - 1].title" >
                               <div class="film__name" v-if="((this.current)*3 + n - 1) < this.numOfElement">

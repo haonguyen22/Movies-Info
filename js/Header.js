@@ -20,7 +20,7 @@ export default {
                     <h1>Movies info</h1>
                </div>
                <div class="header__right">
-                    <p>k_r49rp6br</p>
+                    <p>k_ddst01er</p>
                     <div class="dark_mode">
                          <label class="switch">
                               <input type="checkbox" v-model="checked">
